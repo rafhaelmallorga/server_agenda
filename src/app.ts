@@ -1,10 +1,11 @@
 import express from "express"
+import appRoutes from "./routers";
 
 const app = express()
 
 app.use(express.json())
 
-app.use('/clients', () => console.log('clientes ok'))
+appRoutes(app)
 
 
 
