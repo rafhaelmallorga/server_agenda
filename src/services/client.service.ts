@@ -52,9 +52,39 @@ class ClientsServices {
         return client
     }
 
-    // static async updateUserService(id: string, data) {
+    static async updateClientService(id: string, data: IClientCreate) {
+        const clientRepository = AppDataSource.getRepository(Client)
+        const clients = await clientRepository.find()
+        const clientFound = clients.find(client => client.id === id)
 
-    // }
+        if (!clientFound) {
+            throw new AppError(404, 'Client not found')
+        }
+
+        const client = await clientRepository.update(clientFound!.id, data);
+
+        if (client.affected === 1) {
+            const clientUpdated = await clientRepository.findOneBy({id: id})
+            return clientUpdated
+        }
+
+
+
+    }
+
+    static async deleteClientService(id: string) {
+        const clientRepository = AppDataSource.getRepository(Client)
+        const clients = await clientRepository.find()
+        const clientFound = clients.find(client => client.id === id)
+
+        if (!clientFound) {
+            throw new AppError(404, 'Client not found')
+        }
+
+        await clientRepository.delete(clientFound!.id)
+
+        return true
+    }
 }
 
 export default ClientsServices

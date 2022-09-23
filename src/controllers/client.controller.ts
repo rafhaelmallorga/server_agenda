@@ -31,6 +31,21 @@ class ClientsControllers {
         return res.status(200).json(client)
 
     }
+
+    static async update(req: Request, res: Response) {
+        const id = req.params.id
+        const clientUpdated = await ClientsServices.updateClientService(id, req.body)
+
+        return res.status(200).json(clientUpdated)
+    }
+
+    static async delete(req: Request, res: Response) {
+        const id = req.params.id
+
+        await ClientsServices.deleteClientService(id)
+
+        return res.status(204).json({message: "Client deleted with success."})
+    }
 }
 
 export default ClientsControllers
