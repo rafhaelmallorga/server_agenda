@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "sucrase-node src/server.ts",
-    "build": ""
+    "dev": "nodemon src/server.ts",
+    "build": "",
+    "typeorm": "ts-node-dev node_modules/.bin/typeorm"
   },
   "repository": "git@github.com:rafhaelmallorga/server_agenda.git",
   "author": "Rafhael Mallorga <rafhaelmallorga@gmail.com>",
@@ -12,6 +13,7 @@
   "devDependencies": {
     "@types/express": "^4.17.14",
     "@types/node": "^18.7.18",
+    "@types/uuid": "^8.3.4",
     "nodemon": "^2.0.20",
     "sucrase": "^3.27.0",
     "ts-node-dev": "^2.0.0",
@@ -22,6 +24,7 @@
     "express": "^4.18.1",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "uuid": "^9.0.0"
   }
 }
