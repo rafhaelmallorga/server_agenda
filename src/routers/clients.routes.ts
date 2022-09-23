@@ -1,10 +1,12 @@
 import { Router } from "express";
+import ClientsControllers from "../controllers/client.controller";
 
 
 const routes = Router();
 
 export const clientsRoutes = () => {
-    routes.get('', () => console.log('create client'));
+    routes.post('', ClientsControllers.create);
+    routes.get('', ClientsControllers.list);
 
     return routes
     
