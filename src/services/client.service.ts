@@ -12,6 +12,16 @@ class ClientsServices {
     }: IClientCreate): Promise<Client | AppError> {
         const clientRepository = AppDataSource.getRepository(Client)
 
+        const clients = await clientRepository.find();
+
+        if (clients.find(client => client.full_name === full_name)) {
+            throw new AppError(409, 'This client already exists!')
+        }
+
+        if (clients.find(client => client.email === email)) {
+            throw new AppError(409, 'This client already exists!')
+        }
+
         const newClient = new Client();
         newClient.full_name =full_name;
         newClient.email = email;
