@@ -23,6 +23,14 @@ class ClientsControllers {
 
         return res.status(200).json(clients)
     }
+
+    static async retrieve(req: Request, res: Response) {
+        const id = req.params.id
+        const client = await ClientsServices.retrieveClientService(id)
+
+        return res.status(200).json(client)
+
+    }
 }
 
 export default ClientsControllers

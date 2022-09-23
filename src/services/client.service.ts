@@ -40,6 +40,21 @@ class ClientsServices {
 
         return clients
     }
+
+    static async retrieveClientService(id: string) {
+        const clientRepository = AppDataSource.getRepository(Client)
+        const client = await clientRepository.findOne({where: {id}})
+
+        if (!client) {
+            throw new AppError(404, 'Client not found.')
+        }
+
+        return client
+    }
+
+    // static async updateUserService(id: string, data) {
+
+    // }
 }
 
 export default ClientsServices
