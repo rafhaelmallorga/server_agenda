@@ -16,7 +16,7 @@ export class Contact {
     @Column('varchar', {length: 50, nullable: false})
     phone: string;
 
-    @ManyToOne(()=>Client, (client)=>client.contacts)
+    @ManyToOne(()=>Client, (client)=>client.contacts, {eager: true})
     client: Client
 
     constructor() {
