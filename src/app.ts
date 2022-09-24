@@ -12,6 +12,4 @@ appRoutes(app)
 app.use(handleAppErrorMiddleware)
 
 
-
-
 export default app;
