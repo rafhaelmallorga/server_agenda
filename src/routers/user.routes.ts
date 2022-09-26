@@ -6,9 +6,10 @@ const routes = Router()
 
 export const userRoutes = () => {
     routes.post('', UserControllers.create)
+    routes.post('/login', UserControllers.login)
     routes.get('/me', authUser, UserControllers.retrieve)
     routes.patch('/me', authUser, UserControllers.update)
-    routes.delete('me', authUser, UserControllers.delete)
+    routes.delete('/me', authUser, UserControllers.delete)
 
     return routes
 }
