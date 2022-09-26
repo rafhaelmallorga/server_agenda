@@ -6,7 +6,7 @@ import { userRoutes } from "./user.routes";
 const appRoutes = (app: Express) => {
     app.use('/clients', clientsRoutes())
     app.use('/contacts', contactsRoutes())
-    app.use('/user', userRoutes)
+    app.use('/user', userRoutes())
 }
 
 export default appRoutes
