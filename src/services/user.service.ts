@@ -109,3 +109,5 @@ class UserServices {
         return true
     }
 }
+
+export default UserServices
