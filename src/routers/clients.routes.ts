@@ -13,5 +13,4 @@ export const clientsRoutes = () => {
     routes.delete('/:id', authUser, ClientsControllers.delete);
 
     return routes
-    
 }

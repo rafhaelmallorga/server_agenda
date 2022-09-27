@@ -46,6 +46,13 @@ class ClientsControllers {
 
         return res.status(204).json({message: "Client deleted with success."})
     }
+
+    static async generateReport(req: Request, res: Response) {
+        
+        const data = await ClientsServices.generateReport()
+
+        return res.status(200).json(data)
+    }
 }
 
 export default ClientsControllers

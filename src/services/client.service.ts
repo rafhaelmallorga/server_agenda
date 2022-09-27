@@ -1,6 +1,7 @@
 import { AppDataSource } from "../data-source";
 import { AppError } from "../errors/AppError";
 import { Client } from "../entities/client.entity";
+import { Contact } from "../entities/contact.entity";
 import { IClientCreate } from "../interfaces/clients";
 
 
@@ -84,6 +85,19 @@ class ClientsServices {
         await clientRepository.delete(clientFound!.id)
 
         return true
+    }
+
+    static async generateReport () {
+        const clientRepository = AppDataSource.getRepository(Client)
+        const contactRepository = AppDataSource.getRepository(Contact)
+
+        const clients = await clientRepository.find()
+        const contacts = await contactRepository.find()
+
+        let reportData = clients.map(client => contacts.filter(contact => contact.client.id === client.id))
+
+        return reportData
+
     }
 }
 
