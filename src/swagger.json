@@ -17,6 +17,164 @@
   ],
 
   "paths": {
+    "/user": {
+      "post": {
+        "summary": "Create new user.",
+        "description": "This route is responsible for creating a new user.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "first_name": "Rafhael",
+                    "last_name": "Mallorga",
+                    "email": "rm@email.com",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "E-mail already exists!"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "Login.",
+        "description": "This route is responsible for user login.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "rm@email.com",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "403": {
+            "description": "Invalid credentials"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/me": {
+      "get": {
+        "summary": "Retrieve user infos.",
+        "description": "This route is responsible for retrieve user infos.",
+        "tags": ["User"],
+
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update user infos.",
+        "description": "This route is responsible for update user infos.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "first_name": "Rafhael UPDATED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserUpdated"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user.",
+        "description": "This route is responsible for delete user.",
+        "tags": ["User"],
+
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+
     "/clients": {
       "post": {
         "summary": "Create new client.",
@@ -41,6 +199,9 @@
           }
         },
         "responses": {
+          "400": {
+            "description": "No token found"
+          },
           "409": {
             "description": "This client already exists!"
           },
@@ -50,10 +211,260 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/Client"
+                  "$ref": "#/components/schemas/ClientResponse"
                 }
               }
             }
+          }
+        }
+      },
+      "get": {
+        "summary": "List clients.",
+        "description": "This route is responsible for list the clients.",
+        "tags": ["Clients"],
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/ClientResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{client_id}": {
+      "get": {
+        "summary": "Retrieve client.",
+        "description": "This route is responsible for retrieve a client.",
+        "tags": ["Clients"],
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ClientResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update client.",
+        "description": "This route is responsible for update a client.",
+        "tags": ["Clients"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "full_name": "Big Tech Company Ltda - UPDATED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ClientUpdated"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Update client.",
+        "description": "This route is responsible for update a client.",
+        "tags": ["Clients"],
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/contacts/{client_id}": {
+      "post": {
+        "summary": "Create new contact.",
+        "description": "This route is responsible for creating a new contact.",
+        "tags": ["Contacts"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              },
+              "examples": {
+                "client": {
+                  "value": {
+                    "full_name": "Joao dos Santos",
+                    "email": "joao@bigtech.com",
+                    "phone": "11 3003-1001"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "No token found"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "409": {
+            "description": "This contact already exists!"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List contacts by client id.",
+        "description": "This route is responsible for list contacts by client id.",
+        "tags": ["Contacts"],
+        "responses": {
+          "404": {
+            "description": "Client not found"
+          },
+          "409": {
+            "description": "This client already exists!"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/info/{contact_id}": {
+      "get": {
+        "summary": "Retrieve contacts by contact id.",
+        "description": "This route is responsible for list contacts by contact id.",
+        "tags": ["Contacts"],
+        "responses": {
+          "404": {
+            "description": "Contact not found"
+          },
+
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update contacts by contact id.",
+        "description": "This route is responsible for update contacts by contact id.",
+        "tags": ["Contacts"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "full_name": "Joao dos Santos - UPDATED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Contact not found"
+          },
+
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ContactUpdated"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete contacts by contact id.",
+        "description": "This route is responsible for delete contacts by contact id.",
+        "tags": ["Contacts"],
+        "responses": {
+          "404": {
+            "description": "Contact not found"
+          },
+
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -61,6 +472,101 @@
   },
   "components": {
     "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "Rafhael"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Mallorga"
+          },
+          "email": {
+            "type": "string",
+            "example": "rm@email.com"
+          }
+        }
+      },
+      "UserUpdated": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "Rafhael UPDATED"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Mallorga"
+          },
+          "email": {
+            "type": "string",
+            "example": "rm@email.com"
+          }
+        }
+      },
+      "UserRetrieve": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
       "Client": {
         "type": "object",
         "properties": {
@@ -72,6 +578,163 @@
           },
           "phone": {
             "type": "string"
+          }
+        }
+      },
+      "ClientResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "full_name": {
+            "type": "string",
+            "example": "Big Tech Company Ltda"
+          },
+          "email": {
+            "type": "string",
+            "example": "contact@bigtech.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "11 3003-3003"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2022-09-26T22:46:13.824Z"
+          }
+        }
+      },
+
+      "ClientUpdated": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "full_name": {
+            "type": "string",
+            "example": "Big Tech Company Ltda - UPDATED"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@bigtech.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "11 3003-3003"
+          },
+          "created_at": {
+            "type": "date",
+            "example": "2022-09-26T22:46:13.824Z"
+          }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "full_name": {
+            "type": "string",
+            "example": "Joao dos Santos"
+          },
+          "email": {
+            "type": "string",
+            "example": "joao@bigtech.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "11 3003-1001"
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "uuid"
+              },
+              "full_name": {
+                "type": "string",
+                "example": "Big Tech Company Ltda"
+              },
+              "email": {
+                "type": "string",
+                "example": "contato@bigtech.com"
+              },
+              "phone": {
+                "type": "string",
+                "example": "11 3003-3003"
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2022-09-26T22:46:13.824Z"
+              }
+            }
+          }
+        }
+      },
+      "ContactUpdated": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "uuid"
+          },
+          "full_name": {
+            "type": "string",
+            "example": "Joao dos Santos - UPDATED"
+          },
+          "email": {
+            "type": "string",
+            "example": "joao@bigtech.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "11 3003-1001"
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "uuid"
+              },
+              "full_name": {
+                "type": "string",
+                "example": "Big Tech Company Ltda"
+              },
+              "email": {
+                "type": "string",
+                "example": "contato@bigtech.com"
+              },
+              "phone": {
+                "type": "string",
+                "example": "11 3003-3003"
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2022-09-26T22:46:13.824Z"
+              }
+            }
           }
         }
       }
