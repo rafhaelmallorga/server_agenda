@@ -104,7 +104,7 @@
         "summary": "Retrieve user infos.",
         "description": "This route is responsible for retrieve user infos.",
         "tags": ["User"],
-
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "400": {
             "description": "No token found"
@@ -126,6 +126,7 @@
         "summary": "Update user infos.",
         "description": "This route is responsible for update user infos.",
         "tags": ["User"],
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -163,7 +164,7 @@
         "summary": "Delete user.",
         "description": "This route is responsible for delete user.",
         "tags": ["User"],
-
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "400": {
             "description": "No token found"
@@ -180,6 +181,7 @@
         "summary": "Create new client.",
         "description": "This route is responsible for creating a new client.",
         "tags": ["Clients"],
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -222,6 +224,7 @@
         "summary": "List clients.",
         "description": "This route is responsible for list the clients.",
         "tags": ["Clients"],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "400": {
             "description": "No token found"
@@ -245,6 +248,7 @@
         "summary": "Retrieve client.",
         "description": "This route is responsible for retrieve a client.",
         "tags": ["Clients"],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "400": {
             "description": "No token found"
@@ -269,6 +273,7 @@
         "summary": "Update client.",
         "description": "This route is responsible for update a client.",
         "tags": ["Clients"],
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -309,6 +314,7 @@
         "summary": "Update client.",
         "description": "This route is responsible for update a client.",
         "tags": ["Clients"],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "400": {
             "description": "No token found"
@@ -322,11 +328,36 @@
         }
       }
     },
+    "/report/clients": {
+      "get": {
+        "summary": "Generate a report.",
+        "description": "This route generate a report of all clients and contacts on browser.",
+        "tags": ["Clients"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/report/clients/pdf": {
+      "get": {
+        "summary": "Generate a report in a PDF format.",
+        "description": "This route generate a report of all clients and contacts in a PDF format.",
+        "tags": ["Clients"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/contacts/{client_id}": {
       "post": {
         "summary": "Create new contact.",
         "description": "This route is responsible for creating a new contact.",
         "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -372,6 +403,7 @@
         "summary": "List contacts by client id.",
         "description": "This route is responsible for list contacts by client id.",
         "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "404": {
             "description": "Client not found"
@@ -398,6 +430,7 @@
         "summary": "Retrieve contacts by contact id.",
         "description": "This route is responsible for list contacts by contact id.",
         "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "404": {
             "description": "Contact not found"
@@ -420,6 +453,7 @@
         "summary": "Update contacts by contact id.",
         "description": "This route is responsible for update contacts by contact id.",
         "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -458,6 +492,7 @@
         "summary": "Delete contacts by contact id.",
         "description": "This route is responsible for delete contacts by contact id.",
         "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "404": {
             "description": "Contact not found"
@@ -471,6 +506,13 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
       "User": {
         "type": "object",
