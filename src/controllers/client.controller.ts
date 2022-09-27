@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import ejs from "ejs"
 import path from "path";
+import pdf from "html-pdf"
+import puppeteer from "puppeteer"
 import ClientsServices from "../services/client.service";
 
 class ClientsControllers {
@@ -70,6 +72,26 @@ class ClientsControllers {
             }
         )
 
+    }
+
+    static async generatePDFReport (req: Request, res: Response) {
+        const browser = await puppeteer.launch()
+        const page = await browser.newPage()
+
+        await page.goto("http://localhost:3000/report/clients", {
+            waitUntil: 'networkidle0'
+        })
+
+        const pdf = await page.pdf({
+            printBackground: true,
+            format: 'Letter'
+        })
+
+        await browser.close()
+
+        res.contentType("application/pdf")
+
+        return res.send(pdf)
     }
 }
 

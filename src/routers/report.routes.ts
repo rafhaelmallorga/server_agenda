@@ -7,6 +7,7 @@ const routes = Router();
 
 export const reportRoutes = () => {    
     routes.get('', ClientsControllers.generateReport);
+    routes.get('/pdf', ClientsControllers.generatePDFReport);
 
     return routes
 }
