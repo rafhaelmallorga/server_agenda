@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import ejs from "ejs"
+import path from "path";
 import ClientsServices from "../services/client.service";
 
 class ClientsControllers {
@@ -48,10 +50,26 @@ class ClientsControllers {
     }
 
     static async generateReport(req: Request, res: Response) {
-        
         const data = await ClientsServices.generateReport()
+     
+        const filePath = path.join(__dirname, '../', 'report', 'report.ejs')
 
-        return res.status(200).json(data)
+        ejs.renderFile(
+            filePath,
+            {
+                contactsArray: data.reportData,
+                clientArray: data.clients
+
+            },
+            (err, data) => {
+                if (err) {
+                    return res.status(400).json({message: "Error during document reading."})
+                }
+
+                return res.status(200).send(data)
+            }
+        )
+
     }
 }
 

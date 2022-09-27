@@ -4,12 +4,87 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <title>Relatório</title>
   </head>
-  <body>
-    <div>
-      <h1>Relatório de clientes</h1>
-      <%= if (clients.length > 0) { %> <%= clients.forEach(client => { %>
+  <body class="bg-blue-200 tracking-wide">
+    <div class="">
+      <h1
+        class="font-black text-gray-700 text-4xl text-center tracking-tight uppercase"
+      >
+        Relatório de clientes
+      </h1>
+      <% if (contactsArray.length > 0) { %> <%
+      contactsArray.forEach((filteredByClient, index) => { %> <% if
+      (filteredByClient[index] === undefined) { %>
+      <div class="bg-white m-4 p-4 rounded shadow-md">
+        <h2 class="font-black text-sm">
+          &#127970; Empresa:
+          <span class="font-medium text-lg"
+            ><%= clientArray[index].full_name %>
+          </span>
+        </h2>
+        <p class="font-black text-sm">
+          &#128231; E-mail:
+          <span class="font-medium"><%= clientArray[index].email %> </span>
+        </p>
+        <p class="font-black text-sm">
+          &#128222; Telefone:
+          <span class="font-medium"><%= clientArray[index].phone %> </span>
+        </p>
+        <div
+          class="w-max my-4 p-2 bg-gray-100 grid grid-cols-3 gap-1 rounded shadow-inner shadow-lg"
+        >
+          <span>Nenhum contato cadastrado</span>
+        </div>
+      </div>
+
+      <% } else { %>
+      <div class="bg-white m-4 p-4 rounded shadow-md">
+        <h2 class="font-black text-sm">
+          &#127970; Empresa:
+          <span class="font-medium text-lg"
+            ><%= filteredByClient[index].client.full_name %>
+          </span>
+        </h2>
+        <p class="font-black text-sm">
+          &#128231; E-mail:
+          <span class="font-medium text-md"
+            ><%= filteredByClient[index].client.email %>
+          </span>
+        </p>
+        <p class="font-black text-sm">
+          &#128222; Telefone:
+          <span class="font-medium text-md"
+            ><%= filteredByClient[index].client.phone %>
+          </span>
+        </p>
+        <div
+          class="w-max my-4 p-2 bg-gray-100 grid grid-cols-3 gap-1 rounded shadow-inner shadow-lg"
+        >
+          <% filteredByClient.forEach(contact => { %>
+          <div class="bg-white m-1 p-4 rounded shadow-lg">
+            <h3 class="text-sm">
+              &#128280; Nome
+              <span class="text-md font-black"><%= contact.full_name %> </span>
+            </h3>
+            <p class="text-sm">
+              &#128231; E-mail:
+              <span class="text-md font-black"><%= contact.email %> </span>
+            </p>
+            <p class="text-sm">
+              &#128222; Telefone:
+              <span class="text-md font-black"><%= contact.phone %> </span>
+            </p>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <% } %> <% }) %> <% } %>
     </div>
   </body>
 </html>
