@@ -88,6 +88,10 @@ class UserServices {
             throw new AppError(404, 'User not found')
         }
 
+        if (Object.keys(data).some(key => key === "password")) {
+            data.password = bcrypt.hashSync(data.password, 10)
+        }
+
         const userUpdated = await userRepository.update(user!.id, data)
 
         if (userUpdated.affected === 1) {
