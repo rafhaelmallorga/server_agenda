@@ -35,15 +35,10 @@ Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.examp
 cp .env.example .env
 ```
 
-Configure suas variaveis de ambiente com suas credenciais do Postgres, caso não tenha alterado o arquivo **docker-compose.yml** esta devem ser suas credenciais.
+Configure suas variaveis de ambiente com suas credenciais do Postgres.
 
 ```env
-POSTGRES_USER = postgres
-POSTGRES_PASSWORD = postgres
-POSTGRES_DB = default
-PORT = 3000
-SECRET_KEY = chave_secreta
-BASE_URL = https://api-agenda-typescript.herokuapp.com/
+DATABASE_URL="postgres://user:password@localhost:5432/database"
 ```
 
 Rode as migrations com o comando a seguir:
@@ -95,8 +90,10 @@ Nesta aplicação é possivel gerar o relatório dos clientes cadastrados com se
 
 Para isso podemos utilizar dois end-points diferentes.
 
-- Abrir no navegador: **/report/clients**
-- Gerar um arquivo PDF: **/report/clients/pdf**
+- [Abrir no navegador](https://api-agenda-typescript.herokuapp.com/report/clients)
+- [Gerar um arquivo PDF](https://api-agenda-typescript.herokuapp.com/report/clients/pdf)
+
+<img src="./src/assets/report_example.png" alt="Report Image">
 
 ## 5. Testes
 
@@ -107,6 +104,8 @@ Para rodar os testes do Jest basta utilizar o comando abaixo:
 ```shell
 yarn test
 ```
+
+<img src="./src/assets/tests_jest.png" alt="Tests Jest Image">
 
 ## 6. Diagrama Agenda API
 
