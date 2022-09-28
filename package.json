@@ -4,11 +4,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "build": "tsc",
     "start": "node dist/src/server.js",
     "typeorm": "ts-node-dev node_modules/.bin/typeorm",
     "test": "NODE_ENV=test jest",
-    "test:coverage": "NODE_ENV=test jest --verbose"
+    "test:coverage": "NODE_ENV=test jest --verbose",
+    "copy-file": "copyfiles -u 1 src/report/*.ejs dist/src/",
+    "build": "tsc && yarn run copy-file"
   },
   "repository": "git@github.com:rafhaelmallorga/server_agenda.git",
   "author": "Rafhael Mallorga <rafhaelmallorga@gmail.com>",
@@ -23,6 +24,8 @@
     "@types/supertest": "^2.0.12",
     "@types/swagger-ui-express": "^4.1.3",
     "@types/uuid": "^8.3.4",
+    "copyfiles": "^2.4.1",
+    "ejs-ts": "^1.0.0",
     "jest": "^29.0.3",
     "nodemon": "^2.0.20",
     "sqlite3": "^5.1.1",
