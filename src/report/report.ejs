@@ -18,9 +18,8 @@
         Relatório de clientes
       </h1>
       <% if (contactsArray.length > 0) { %> <%
-      contactsArray.forEach((filteredByClient, index) => { %> <% if
-      (filteredByClient[index] === undefined) { %> <%
-      console.log(filteredByClient[index]) %>
+      contactsArray.forEach((filteredByClient, index) => { %> <%
+      if(filteredByClient[0] === undefined) { %>
       <div class="bg-white m-4 p-4 rounded shadow-md">
         <h2 class="font-black text-sm">
           &#127970; Empresa:
@@ -48,19 +47,19 @@
         <h2 class="font-black text-sm">
           &#127970; Empresa:
           <span class="font-medium text-lg"
-            ><%= filteredByClient[index].client.full_name %>
+            ><%= filteredByClient[0].client.full_name %>
           </span>
         </h2>
         <p class="font-black text-sm">
           &#128231; E-mail:
           <span class="font-medium text-md"
-            ><%= filteredByClient[index].client.email %>
+            ><%= filteredByClient[0].client.email %>
           </span>
         </p>
         <p class="font-black text-sm">
           &#128222; Telefone:
           <span class="font-medium text-md"
-            ><%= filteredByClient[index].client.phone %>
+            ><%= filteredByClient[0].client.phone %>
           </span>
         </p>
         <div

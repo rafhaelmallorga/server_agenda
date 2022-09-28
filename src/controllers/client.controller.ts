@@ -57,8 +57,6 @@ class ClientsControllers {
      
         const filePath = path.join(__dirname, '../', 'report', 'report.ejs')
 
-        console.log(__dirname)
-
         ejs.renderFile(
             filePath,
             {

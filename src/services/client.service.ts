@@ -96,6 +96,7 @@ class ClientsServices {
 
         let reportData = clients.map(client => contacts.filter(contact => contact.client.id === client.id))
 
+        
         return {reportData, clients}
 
     }
