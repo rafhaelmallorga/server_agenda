@@ -4,6 +4,7 @@ import path from "path";
 import pdf from "html-pdf"
 import puppeteer from "puppeteer"
 import ClientsServices from "../services/client.service";
+import "dotenv/config"
 
 class ClientsControllers {
     static async create(req: Request, res: Response) {
@@ -78,7 +79,7 @@ class ClientsControllers {
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
 
-        await page.goto("http://localhost:3000/report/clients", {
+        await page.goto(`${process.env.BASE_URL}/report/clients`, {
             waitUntil: 'networkidle0'
         })
 
