@@ -19,7 +19,8 @@
       </h1>
       <% if (contactsArray.length > 0) { %> <%
       contactsArray.forEach((filteredByClient, index) => { %> <% if
-      (filteredByClient[index] === undefined) { %>
+      (filteredByClient[index] === undefined) { %> <%
+      console.log(filteredByClient[index]) %>
       <div class="bg-white m-4 p-4 rounded shadow-md">
         <h2 class="font-black text-sm">
           &#127970; Empresa:

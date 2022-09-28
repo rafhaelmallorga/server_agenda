@@ -78,7 +78,7 @@ class ClientsControllers {
     }
 
     static async generatePDFReport (req: Request, res: Response) {
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({args: ['--no-sandbox']})
         const page = await browser.newPage()
 
         await page.goto(`https://api-agenda-typescript.herokuapp.com/report/clients`, {
