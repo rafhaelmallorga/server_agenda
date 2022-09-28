@@ -43,7 +43,7 @@ POSTGRES_PASSWORD = postgres
 POSTGRES_DB = default
 PORT = 3000
 SECRET_KEY = chave_secreta
-BASE_URL = http://localhost:3000/
+BASE_URL = https://api-agenda-typescript.herokuapp.com/
 ```
 
 Rode as migrations com o comando a seguir:
@@ -85,7 +85,7 @@ yarn dev
 
 [Voltar ao topo.](#sumário)
 
-Para acessar a documentação da API [clique aqui](http://localhost:3000/docs/).
+Para acessar a documentação da API [clique aqui](https://api-agenda-typescript.herokuapp.com/docs/).
 
 ## 4. Relatórios
 

@@ -57,6 +57,8 @@ class ClientsControllers {
      
         const filePath = path.join(__dirname, '../', 'report', 'report.ejs')
 
+        console.log(__dirname)
+
         ejs.renderFile(
             filePath,
             {
@@ -79,7 +81,7 @@ class ClientsControllers {
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
 
-        await page.goto(`${process.env.BASE_URL}/report/clients`, {
+        await page.goto(`https://api-agenda-typescript.herokuapp.com/report/clients`, {
             waitUntil: 'networkidle0'
         })
 
